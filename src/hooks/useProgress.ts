@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useSyncExternalStore } from "react";
 import { UserProgress, Category } from "@/types/game";
 import {
   getProgress,
@@ -10,14 +10,15 @@ import {
   checkMastery,
 } from "@/lib/storage";
 
-export function useProgress(categories?: Category[]) {
-  const [progress, setProgress] = useState<UserProgress | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+// SSR-safe progress loader using useSyncExternalStore
+const subscribe = () => () => {};
+const getSnapshot = () => getProgress();
+const getServerSnapshot = (): UserProgress => ({ xp: 0, level: 1, currentCategory: "", completedLevels: [], streak: 0, streakFreezes: 0, itemScores: {} });
 
-  useEffect(() => {
-    setProgress(getProgress());
-    setIsLoading(false);
-  }, []);
+export function useProgress(categories?: Category[]) {
+  const stored = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [progress, setProgress] = useState<UserProgress | null>(stored);
+  const isLoading = false;
 
   const earnXP = useCallback((amount: number) => {
     const updated = addXP(amount);

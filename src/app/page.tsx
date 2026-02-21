@@ -7,7 +7,6 @@ import { StreakBadge } from "@/components/ui/StreakBadge";
 import { XPBar } from "@/components/ui/XPBar";
 import { useProgress } from "@/hooks/useProgress";
 
-// OVERRIDE these per game
 const GAME_TITLE = "PROMPT CRAFT";
 const GAME_SUBTITLE = "Master the Art of Talking to AI";
 const GAME_TAGLINE = "CRAFT PROMPTS. SHAPE AI.";
@@ -19,7 +18,7 @@ export default function Home() {
     return (
       <main className="min-h-screen flex items-center justify-center">
         <p className="font-pixel text-xs text-game-primary animate-pulse-neon">
-          LOADING...
+          HEATING THE FORGE...
         </p>
       </main>
     );
@@ -27,11 +26,21 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-8 relative">
-      {/* Decorative corners */}
-      <div className="fixed top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-game-primary/30" />
-      <div className="fixed top-4 right-16 w-8 h-8 border-t-2 border-r-2 border-game-primary/30" />
-      <div className="fixed bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-game-primary/30" />
-      <div className="fixed bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-game-primary/30" />
+      {/* Forge corners — angular, industrial */}
+      <div className="fixed top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-game-secondary/40" />
+      <div className="fixed top-4 right-16 w-12 h-12 border-t-2 border-r-2 border-game-secondary/40" />
+      <div className="fixed bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-game-secondary/40" />
+      <div className="fixed bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-game-secondary/40" />
+
+      {/* Forge header */}
+      <motion.p
+        className="font-pixel text-[7px] text-game-secondary/30 tracking-[0.3em] mb-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        ⚒ THE PROMPT SMITH&apos;S FORGE ⚒
+      </motion.p>
 
       {progress && <StreakBadge streak={progress.streak} />}
 
@@ -46,10 +55,10 @@ export default function Home() {
         transition={{ delay: 0.5 }}
       >
         <Button href="/play" variant="primary">
-          START GAME
+          ⚒ ENTER THE FORGE
         </Button>
-        <Button href="/categories" variant="secondary">
-          CATEGORIES
+        <Button href="/play" variant="secondary">
+          QUICK FORGE
         </Button>
       </motion.div>
 
