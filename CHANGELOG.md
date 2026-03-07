@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1] - 2026-03-06
+
+### Fixed
+- "QUICK FORGE" button now auto-selects a random category and skips the selection screen, delivering on its promise of a fast-start experience
+- Previously both landing page buttons routed to the same category selection screen with no behavioral difference
+
 ## [0.2.0] - 2026-02-21
 
 ### Added

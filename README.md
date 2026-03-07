@@ -8,7 +8,7 @@ An educational browser game that teaches prompt engineering through the COSTAR f
 
 ## 🎮 How It Works
 
-1. **Choose a category** — Basic Prompts or Context Setting (more coming)
+1. **Choose a category** — Basic Prompts or Context Setting (more coming), or hit **QUICK FORGE** to jump straight in with a random category
 2. **Read the goal** — e.g., "Get AI to write a haiku about coding"
 3. **Craft your prompt** — Write the best prompt you can
 4. **Get scored** — COSTAR engine evaluates 6 dimensions (0-5 each, max 30)

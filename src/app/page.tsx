@@ -57,7 +57,7 @@ export default function Home() {
         <Button href="/play" variant="primary">
           ⚒ ENTER THE FORGE
         </Button>
-        <Button href="/play" variant="secondary">
+        <Button href="/play?quick=true" variant="secondary">
           QUICK FORGE
         </Button>
       </motion.div>

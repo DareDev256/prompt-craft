@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { Suspense, useState, useCallback, useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { VictoryScreen } from "@/components/game/VictoryScreen";
@@ -12,7 +13,21 @@ import { GameResults } from "@/types/game";
 
 type Phase = "select" | "prompt" | "result" | "victory";
 
+// Suspense wrapper — required by Next.js for useSearchParams during static generation
 export default function PlayPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen flex items-center justify-center">
+        <p className="font-pixel text-xs text-game-primary animate-pulse-neon">HEATING THE FORGE...</p>
+      </main>
+    }>
+      <PlayContent />
+    </Suspense>
+  );
+}
+
+function PlayContent() {
+  const searchParams = useSearchParams();
   const [phase, setPhase] = useState<Phase>("select");
   const [categoryId, setCategoryId] = useState("");
   const [queue, setQueue] = useState<PromptItem[]>([]);
@@ -34,6 +49,18 @@ export default function PlayPage() {
     setCurrent(0);
     setPhase("prompt");
   }, []);
+
+  // Auto-select: ?quick=true picks a random category and skips selection
+  const didAutoSelect = useRef(false);
+  useEffect(() => {
+    if (didAutoSelect.current) return;
+    if (searchParams.get("quick") === "true" && categories.length > 0) {
+      didAutoSelect.current = true;
+      const randomCat = categories[Math.floor(Math.random() * categories.length)];
+      // Deferred to satisfy react-hooks/set-state-in-effect — batched on next frame
+      requestAnimationFrame(() => selectCategory(randomCat.id));
+    }
+  }, [searchParams, selectCategory]);
 
   const submitPrompt = useCallback(() => {
     if (!input.trim() || !item) return;
