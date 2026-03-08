@@ -58,7 +58,8 @@ src/
 │   └── curriculum.ts     # 10 prompt challenges with 4-tier responses
 ├── hooks/                # useProgress, useGameStats, useSoundEffects
 ├── lib/
-│   ├── costar.ts         # COSTAR scoring engine
+│   ├── costar.ts         # COSTAR scoring engine + tier display config
+│   ├── styles.ts         # Shared style tokens (TEXT, BOX, MOTION)
 │   └── storage.ts        # localStorage persistence layer
 └── types/
     └── game.ts           # Shared type definitions

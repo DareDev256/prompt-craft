@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0] - 2026-03-08
+
+### Changed
+- Centralized tier display config (TIER_COLORS, TIER_LABELS) into `costar.ts` — single source of truth for forge tier metadata
+- Extracted shared style tokens (`TEXT`, `BOX`, `MOTION`) into `lib/styles.ts` — eliminates 15+ repeated className strings across `play/page.tsx`
+- Replaced duplicated state-reset logic in victory callbacks with a `resetGame()` helper
+- Simplified `scoreDimension` if/else chain with a `HIT_SCORE` lookup table
+- All Framer Motion transition presets now live in `MOTION` constants for consistent animation timing
+
 ## [0.2.1] - 2026-03-06
 
 ### Fixed

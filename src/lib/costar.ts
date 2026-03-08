@@ -21,16 +21,15 @@ const KEYWORDS: Record<string, string[]> = {
   responseFormat: ["bullet points", "paragraph", "list", "step by step", "table", "json", "markdown", "numbered", "format:", "structured as", "in the form of"],
 };
 
+// Maps keyword hit count → dimension score (0-5).
+// Index = hits, value = score. 4+ hits cap at 5.
+const HIT_SCORE = [0, 2, 3, 4, 5] as const;
+
 function scoreDimension(input: string, dimension: string): number {
   const lower = input.toLowerCase();
   const keys = KEYWORDS[dimension] || [];
   const hits = keys.filter(k => lower.includes(k)).length;
-  // 0 hits = 0, 1 = 2, 2 = 3, 3 = 4, 4+ = 5
-  if (hits === 0) return 0;
-  if (hits === 1) return 2;
-  if (hits === 2) return 3;
-  if (hits === 3) return 4;
-  return 5;
+  return HIT_SCORE[Math.min(hits, HIT_SCORE.length - 1)] ?? 0;
 }
 
 // Bonus for length/specificity: short prompts (<20 chars) get penalized
@@ -60,4 +59,23 @@ export const DIMENSION_LABELS: Record<string, string> = {
   tone: "TONE",
   audience: "AUDIENCE",
   responseFormat: "FORMAT",
+};
+
+// ─── Tier Display Config ───
+// Centralized so game UI and future components share a single source of truth
+
+export type Tier = COSTARScore["tier"];
+
+export const TIER_COLORS: Record<Tier, string> = {
+  bad: "text-game-error",
+  ok: "text-game-warning",
+  good: "text-game-primary",
+  excellent: "text-game-success",
+};
+
+export const TIER_LABELS: Record<Tier, string> = {
+  bad: "RAW ORE",
+  ok: "ROUGH CAST",
+  good: "FORGED STEEL",
+  excellent: "MASTER CRAFT",
 };
