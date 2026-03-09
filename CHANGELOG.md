@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1] - 2026-03-09
+
+### Fixed
+- Game timer now starts when a category is selected, not on component mount — previously inflated elapsed time by including time spent browsing categories
+- Victory screen no longer shows a blank page if results haven't populated yet — displays "TALLYING RESULTS..." loading state as fallback
+- XP bar no longer shows empty (0/100 XP) at exact level boundaries — displays full bar (100/100 XP) so players see completion before the next level
+
 ## [0.3.0] - 2026-03-08
 
 ### Changed

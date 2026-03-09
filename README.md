@@ -34,6 +34,7 @@ An educational browser game that teaches prompt engineering through the COSTAR f
 - **ts-fsrs** — Spaced repetition scheduling (ready for Phase 2)
 - **localStorage** — SSR-safe persistence, zero backend
 - **Zero API keys** — All AI responses are pre-written
+- **Robust state handling** — Fallback loading states prevent blank screens during phase transitions
 
 ## 🚀 Getting Started
 

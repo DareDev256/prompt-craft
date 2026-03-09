@@ -37,7 +37,6 @@ function PlayContent() {
   const [score, setScore] = useState<COSTARScore | null>(null);
   const [scores, setScores] = useState<number[]>([]);
   const startTimeRef = useRef(0);
-  useEffect(() => { startTimeRef.current = Date.now(); }, []);
   const { earnXP } = useProgress();
   const { playCorrect, playIncorrect, playCelebration } = useSoundEffects();
 
@@ -48,6 +47,7 @@ function PlayContent() {
     const catItems = items.filter(i => i.category === id) as PromptItem[];
     setQueue(catItems.slice(0, 5));
     setCurrent(0);
+    startTimeRef.current = Date.now();
     setPhase("prompt");
   }, []);
 
@@ -132,7 +132,14 @@ function PlayContent() {
   }
 
   // ─── VICTORY PHASE ───
-  if (phase === "victory" && finalResults) {
+  if (phase === "victory") {
+    if (!finalResults) {
+      return (
+        <main className="min-h-screen flex items-center justify-center p-6">
+          <p className="font-pixel text-xs text-game-primary animate-pulse-neon">TALLYING RESULTS...</p>
+        </main>
+      );
+    }
     return (
       <main className="min-h-screen flex items-center justify-center p-6">
         <VictoryScreen
