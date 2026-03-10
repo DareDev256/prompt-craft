@@ -54,7 +54,7 @@ src/
 │   └── play/page.tsx     # Core game loop
 ├── components/
 │   ├── ui/               # Button, Logo, StreakBadge, XPBar
-│   └── game/             # Timer, VictoryScreen
+│   └── game/             # Timer, VictoryScreen, PromptPhase, ResultPhase
 ├── data/
 │   └── curriculum.ts     # 10 prompt challenges with 4-tier responses
 ├── hooks/                # useProgress, useGameStats, useSoundEffects

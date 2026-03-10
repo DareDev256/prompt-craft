@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0] - 2026-03-10
+
+### Changed
+- Extracted PromptPhase and ResultPhase from the 261-line `play/page.tsx` monolith into dedicated components (`components/game/PromptPhase.tsx`, `components/game/ResultPhase.tsx`)
+- `PlayContent` now acts as a lean state machine orchestrator (~160 lines) instead of mixing state management with phase rendering
+- Removed unused `AnimatePresence`, `DIMENSION_LABELS`, `TIER_COLORS`, `TIER_LABELS`, `BOX` imports from the play page — each phase component imports only what it needs
+- Each phase component has a clean props interface, making them independently testable and reusable
+
 ## [0.3.1] - 2026-03-09
 
 ### Fixed
