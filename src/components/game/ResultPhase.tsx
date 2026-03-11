@@ -2,8 +2,9 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { COSTARRadar } from "@/components/game/COSTARRadar";
 import { PromptItem } from "@/data/curriculum";
-import { COSTARScore, DIMENSION_LABELS, TIER_COLORS, TIER_LABELS } from "@/lib/costar";
+import { COSTARScore, TIER_COLORS, TIER_LABELS } from "@/lib/costar";
 import { TEXT, BOX, MOTION } from "@/lib/styles";
 
 interface ResultPhaseProps {
@@ -26,17 +27,9 @@ export function ResultPhase({ item, score, isLast, onNext }: ResultPhaseProps) {
         </motion.div>
       </AnimatePresence>
 
-      {/* COSTAR breakdown */}
-      <motion.div className="w-full grid grid-cols-3 gap-2" {...MOTION.fadeIn(0.3)}>
-        {Object.entries(DIMENSION_LABELS).map(([key, label]) => {
-          const val = score[key as keyof COSTARScore] as number;
-          return (
-            <div key={key} className={BOX.cell}>
-              <p className={TEXT.labelSm}>{label}</p>
-              <p className={`font-pixel text-sm mt-1 ${val >= 3 ? "text-game-primary" : val >= 1 ? "text-game-warning" : "text-game-error/60"}`}>{val}/5</p>
-            </div>
-          );
-        })}
+      {/* COSTAR radar chart */}
+      <motion.div className="flex flex-col items-center" {...MOTION.fadeIn(0.3)}>
+        <COSTARRadar score={score} size={180} />
       </motion.div>
 
       {/* Simulated AI Response */}

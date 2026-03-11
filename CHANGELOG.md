@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.0] - 2026-03-11
+
+### Added
+- COSTAR radar chart visualization on the result phase — animated SVG hexagon that maps each of the 6 scoring dimensions as axes, expanding from center on reveal
+- Dimension labels color-code by score (amber for strong, gold for mid, red for weak) providing instant visual feedback
+- Full ARIA labeling for screen reader accessibility on the chart
+
+### Changed
+- Result phase replaces the flat 3×2 number grid with the radar chart for a more intuitive "shape of your prompt" visualization
+
 ## [0.4.0] - 2026-03-10
 
 ### Changed

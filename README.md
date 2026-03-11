@@ -11,7 +11,7 @@ An educational browser game that teaches prompt engineering through the COSTAR f
 1. **Choose a category** — Basic Prompts or Context Setting (more coming), or hit **QUICK FORGE** to jump straight in with a random category
 2. **Read the goal** — e.g., "Get AI to write a haiku about coding"
 3. **Craft your prompt** — Write the best prompt you can
-4. **Get scored** — COSTAR engine evaluates 6 dimensions (0-5 each, max 30)
+4. **Get scored** — COSTAR engine evaluates 6 dimensions (0-5 each, max 30) with an animated radar chart
 5. **See the result** — Pre-written AI response at the quality tier matching your score
 6. **Learn the master prompt** — See the ideal version with educational insights
 
@@ -54,7 +54,7 @@ src/
 │   └── play/page.tsx     # Core game loop
 ├── components/
 │   ├── ui/               # Button, Logo, StreakBadge, XPBar
-│   └── game/             # Timer, VictoryScreen, PromptPhase, ResultPhase
+│   └── game/             # Timer, VictoryScreen, PromptPhase, ResultPhase, COSTARRadar
 ├── data/
 │   └── curriculum.ts     # 10 prompt challenges with 4-tier responses
 ├── hooks/                # useProgress, useGameStats, useSoundEffects
