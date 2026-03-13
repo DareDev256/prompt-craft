@@ -54,10 +54,10 @@ src/
 │   └── play/page.tsx     # Core game loop
 ├── components/
 │   ├── ui/               # Button, Logo, StreakBadge, XPBar
-│   └── game/             # Timer, VictoryScreen, PromptPhase, ResultPhase, COSTARRadar
+│   └── game/             # Timer, VictoryScreen, PromptPhase, ResultPhase, SelectPhase, COSTARRadar
 ├── data/
 │   └── curriculum.ts     # 10 prompt challenges with 4-tier responses
-├── hooks/                # useProgress, useGameStats, useSoundEffects
+├── hooks/                # useProgress, useGameStats, useSoundEffects, useQuickForge
 ├── lib/
 │   ├── costar.ts         # COSTAR scoring engine + tier display config
 │   ├── styles.ts         # Shared style tokens (TEXT, BOX, MOTION)

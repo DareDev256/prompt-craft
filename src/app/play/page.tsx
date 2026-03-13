@@ -1,17 +1,15 @@
 "use client";
 
-import { Suspense, useState, useCallback, useRef, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
+import { Suspense, useState, useCallback, useRef } from "react";
 import { VictoryScreen } from "@/components/game/VictoryScreen";
 import { PromptPhase } from "@/components/game/PromptPhase";
 import { ResultPhase } from "@/components/game/ResultPhase";
-import { categories, items, PromptItem } from "@/data/curriculum";
+import { SelectPhase } from "@/components/game/SelectPhase";
+import { items, PromptItem } from "@/data/curriculum";
 import { scorePrompt, COSTARScore } from "@/lib/costar";
-import { TEXT, MOTION } from "@/lib/styles";
 import { useProgress } from "@/hooks/useProgress";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
+import { useQuickForge } from "@/hooks/useQuickForge";
 import { GameResults } from "@/types/game";
 
 type Phase = "select" | "prompt" | "result" | "victory";
@@ -30,7 +28,6 @@ export default function PlayPage() {
 }
 
 function PlayContent() {
-  const searchParams = useSearchParams();
   const [phase, setPhase] = useState<Phase>("select");
   const [categoryId, setCategoryId] = useState("");
   const [queue, setQueue] = useState<PromptItem[]>([]);
@@ -54,16 +51,7 @@ function PlayContent() {
   }, []);
 
   // Auto-select: ?quick=true picks a random category and skips selection
-  const didAutoSelect = useRef(false);
-  useEffect(() => {
-    if (didAutoSelect.current) return;
-    if (searchParams.get("quick") === "true" && categories.length > 0) {
-      didAutoSelect.current = true;
-      const randomCat = categories[Math.floor(Math.random() * categories.length)];
-      // Deferred to satisfy react-hooks/set-state-in-effect — batched on next frame
-      requestAnimationFrame(() => selectCategory(randomCat.id));
-    }
-  }, [searchParams, selectCategory]);
+  useQuickForge(selectCategory);
 
   const submitPrompt = useCallback(() => {
     if (!input.trim() || !item) return;
@@ -110,27 +98,7 @@ function PlayContent() {
 
   // ─── SELECT PHASE ───
   if (phase === "select") {
-    return (
-      <main className="min-h-screen flex flex-col items-center justify-center p-6 gap-8">
-        <h1 className="font-pixel text-lg text-game-primary neon-glow">SELECT YOUR FORGE</h1>
-        <p className={TEXT.label}>Choose a category to begin crafting</p>
-        <div className="flex flex-col gap-4 w-full max-w-md">
-          {categories.map(cat => (
-            <motion.button
-              key={cat.id}
-              onClick={() => selectCategory(cat.id)}
-              className="p-4 border-2 border-game-primary/40 bg-game-dark/50 text-left hover:border-game-primary hover:bg-game-primary/5 transition-colors cursor-pointer"
-              whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(255,140,0,0.3)" }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span className="font-pixel text-sm text-game-primary">{cat.icon} {cat.title}</span>
-              <p className={`${TEXT.labelSm} mt-2`}>{cat.description}</p>
-            </motion.button>
-          ))}
-        </div>
-        <Button href="/" variant="ghost">← BACK</Button>
-      </main>
-    );
+    return <SelectPhase onSelect={selectCategory} />;
   }
 
   // ─── VICTORY PHASE ───

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0] - 2026-03-13
+
+### Changed
+- Extracted SelectPhase into its own component (`components/game/SelectPhase.tsx`), completing the phase extraction pattern started in v0.4.0 — all 4 game phases now have dedicated components
+- Extracted auto-select logic into `useQuickForge` hook (`hooks/useQuickForge.ts`) — encapsulates `?quick=true` URL detection, ref guard, and deferred category selection
+- PlayContent is now a pure state machine orchestrator with zero inline rendering — each phase delegates to its own component
+- Removed unused `useSearchParams`, `motion`, `Button`, `categories`, `TEXT`, `MOTION` imports from play page
+
 ## [0.5.0] - 2026-03-11
 
 ### Added
