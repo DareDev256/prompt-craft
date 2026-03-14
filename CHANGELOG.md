@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.1] - 2026-03-13
+
+### Added
+- Vitest test infrastructure — `vitest.config.ts`, `npm test` and `npm run test:watch` scripts
+- 19 unit tests for the COSTAR scoring engine covering: tier boundary classification (bad/ok/good/excellent at 0, 9, 10, 18, 24), specificity bonus penalties and rewards at character boundaries (20/150), individual dimension keyword detection and case-insensitivity, HIT_SCORE mapping verification (1→2, 2→3, 3→4, 4+→5), total score clamping to [0, 30], and return value shape contracts
+
 ## [0.6.0] - 2026-03-13
 
 ### Changed

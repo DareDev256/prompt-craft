@@ -34,6 +34,7 @@ An educational browser game that teaches prompt engineering through the COSTAR f
 - **ts-fsrs** — Spaced repetition scheduling (ready for Phase 2)
 - **localStorage** — SSR-safe persistence, zero backend
 - **Zero API keys** — All AI responses are pre-written
+- **Vitest** — Unit tests for scoring engine (19 tests covering tier boundaries, dimension scoring, clamping)
 - **Robust state handling** — Fallback loading states prevent blank screens during phase transitions
 
 ## 🚀 Getting Started
@@ -43,6 +44,8 @@ npm install
 npm run dev     # http://localhost:3000
 npm run build   # Production build
 npm run lint    # ESLint check
+npm test        # Run test suite
+npm run test:watch  # Watch mode
 ```
 
 ## 📁 Project Structure
